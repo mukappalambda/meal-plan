@@ -28,8 +28,8 @@ build-in-docker: pre-step ## Build the PDF inside image
 	@echo "\033[1;32m The PDF is built under current path\033[0m"
 
 install-texlive-deps: ## Install texlive dependencies
-	@tlmgr install xetex xecjk fontspec geometry tcolorbox fancyhdr xcolor titlesec multirow setspace enumitem
-	@sudo apt install fonts-texgyre
+	@tlmgr install latexmk xetex xecjk fontspec geometry tcolorbox fancyhdr xcolor titlesec multirow setspace enumitem
+	@sudo apt install fonts-texgyre=20180621-6
 	@fc-cache -fv
 
 install-tex-fmt: ## Install tex-fmt
