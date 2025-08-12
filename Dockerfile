@@ -6,7 +6,7 @@ RUN tlmgr update --self && \
     tlmgr install latexmk xetex titlesec multirow setspace enumitem fontspec xcolor
 
 RUN apt-get update && \
-    apt-get install --yes --no-install-recommends fonts-texgyre && \
+    apt-get install --yes --no-install-recommends fonts-texgyre=20180621-6 && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
@@ -20,6 +20,6 @@ ENV PATH="/usr/local/texlive/2025/bin/x86_64-linux:$HOME/.local/bin:$PATH"
 
 WORKDIR $HOME
 
-COPY Makefile main.tex .
+COPY Makefile main.tex ./
 
 CMD ["/bin/bash"]
