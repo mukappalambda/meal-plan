@@ -1,4 +1,4 @@
-FROM texlive/texlive:latest-basic AS build
+FROM texlive/texlive:latest-basic@sha256:4da564c0fb1f36f6e72767d4d50b985d8586b2e959399e3b8a08ccb6550c661e AS build
 
 SHELL ["/bin/bash", "-c"]
 
@@ -10,13 +10,17 @@ RUN apt-get update && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
+RUN command -v latexmk && \
+    latexmk -v && \
+    xelatex --version | head -n 1
+
 RUN groupadd -r appuser && useradd --no-log-init -m -s /bin/bash -r -g appuser appuser
 
 USER "appuser"
 
 ENV HOME=/home/appuser
 
-ENV PATH="/usr/local/texlive/2025/bin/x86_64-linux:$HOME/.local/bin:$PATH"
+ENV PATH="$HOME/.local/bin:$PATH"
 
 WORKDIR $HOME
 
